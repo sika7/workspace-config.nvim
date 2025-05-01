@@ -1,3 +1,81 @@
 *workspace-config.txt*  Plugin for per-project configuration
 
-（以下略、先ほどと同じ内容です）
+==============================================================================
+INTRODUCTION                                                    *workspace-config*
+
+workspace-config.nvim is a lightweight plugin that automatically loads
+project-local settings from `.nvim/init.lua`. It is inspired by the
+workspace configuration model in editors like VSCode.
+
+It helps you customize your Neovim environment on a per-project basis
+without affecting global settings.
+
+==============================================================================
+
+FEATURES
+
+- Automatically loads `.nvim/init.lua` at startup
+- Reloads configuration when changing projects (cd, BufEnter, etc.)
+- Prevents redundant reloads for the same project
+- Provides a manual command: `:WorkspaceConfigReload`
+
+==============================================================================
+
+USAGE
+
+1. In the root of your project (e.g., Git root), create:
+
+    `.nvim/init.lua`
+
+2. Inside that file, write any Lua-based Neovim configuration, for example:
+
+>
+>   vim.opt_local.tabstop = 2
+>   vim.keymap.set("n", "<leader>r", ":!npm run dev<CR>", { silent = true })
+>
+
+This configuration will be automatically loaded when the project is opened.
+
+==============================================================================
+
+COMMANDS
+
+                                                        *:WorkspaceConfigReload*
+:WorkspaceConfigReload
+        Reloads the current workspace configuration manually. Useful when
+        you’ve updated `.nvim/init.lua` and want to reapply it
+        immediately.
+
+==============================================================================
+
+IMPLEMENTATION NOTES
+
+- The plugin looks for the Git root using:
+      git rev-parse --show-toplevel
+
+- If no Git repository is found, it falls back to:
+      vim.loop.cwd()
+
+- If `.nvim/init.lua` is found in the project root, it is loaded via:
+      dofile()
+
+- Internal cache ensures the same project is not loaded repeatedly.
+
+==============================================================================
+
+SECURITY
+
+Since `.nvim/init.lua` is executed as raw Lua code, it is strongly
+recommended to only use this in trusted projects.
+
+==============================================================================
+
+AUTHOR
+
+Maintained by sika7 <91676209+sika7@users.noreply.github.com>
+
+==============================================================================
+
+LICENSE
+
+MIT License

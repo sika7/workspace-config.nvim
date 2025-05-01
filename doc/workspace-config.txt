@@ -1,0 +1,3 @@
+*workspace-config.txt*  Plugin for per-project configuration
+
+（以下略、先ほどと同じ内容です）

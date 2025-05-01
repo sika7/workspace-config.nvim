@@ -1,12 +1,12 @@
 # workspace-config.nvim
 
-💼 Lightweight plugin for Neovim that automatically loads per-project settings from `.nvim/init.lua`, similar to VSCode's `init.json`.
+💼 Lightweight plugin for Neovim that automatically loads per-project settings from `.nvim/workspace.lua`, similar to VSCode's `workspace.json`.
 
 ---
 
 ## ✨ Features
 
-- Automatically loads `.nvim/init.lua` on startup
+- Automatically loads `.nvim/workspace.lua` on startup
 - Reloads configuration when switching to another project
 - Prevents redundant reloads for the same project
 - Provides a manual reload command: `:WorkspaceConfigReload`
@@ -18,7 +18,7 @@
 ```plaintext
 my-project/
 ├── .nvim/
-│   └── init.lua   ← Put your project-specific config here
+│   └── workspace.lua   ← Put your project-specific config here
 ├── src/
 │   └── main.lua
 └── ...
@@ -47,7 +47,7 @@ Plug 'sika7/workspace-config.nvim'
 
 ---
 
-## 🧪 Example `.nvim/init.lua`
+## 🧪 Example `.nvim/workspace.lua`
 
 ```lua
 -- Any Lua-based Neovim config
@@ -70,7 +70,7 @@ vim.opt_local.shiftwidth = 2
 
 - Attempts to locate the Git root using `git rev-parse --show-toplevel`
 - Falls back to `vim.loop.cwd()` if Git is not available
-- Loads `.nvim/init.lua` if it exists at that root
+- Loads `.nvim/workspace.lua` if it exists at that root
 - Avoids duplicate loads using an internal cache
 
 ---

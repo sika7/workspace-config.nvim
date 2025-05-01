@@ -4,7 +4,7 @@
 INTRODUCTION                                                    *workspace-config*
 
 workspace-config.nvim is a lightweight plugin that automatically loads
-project-local settings from `.nvim/init.lua`. It is inspired by the
+project-local settings from `.nvim/workspace.lua`. It is inspired by the
 workspace configuration model in editors like VSCode.
 
 It helps you customize your Neovim environment on a per-project basis
@@ -14,7 +14,7 @@ without affecting global settings.
 
 FEATURES
 
-- Automatically loads `.nvim/init.lua` at startup
+- Automatically loads `.nvim/workspace.lua` at startup
 - Reloads configuration when changing projects (cd, BufEnter, etc.)
 - Prevents redundant reloads for the same project
 - Provides a manual command: `:WorkspaceConfigReload`
@@ -25,7 +25,7 @@ USAGE
 
 1. In the root of your project (e.g., Git root), create:
 
-    `.nvim/init.lua`
+    `.nvim/workspace.lua`
 
 2. Inside that file, write any Lua-based Neovim configuration, for example:
 
@@ -43,7 +43,7 @@ COMMANDS
                                                         *:WorkspaceConfigReload*
 :WorkspaceConfigReload
         Reloads the current workspace configuration manually. Useful when
-        you’ve updated `.nvim/init.lua` and want to reapply it
+        you’ve updated `.nvim/workspace.lua` and want to reapply it
         immediately.
 
 ==============================================================================
@@ -56,7 +56,7 @@ IMPLEMENTATION NOTES
 - If no Git repository is found, it falls back to:
       vim.loop.cwd()
 
-- If `.nvim/init.lua` is found in the project root, it is loaded via:
+- If `.nvim/workspace.lua` is found in the project root, it is loaded via:
       dofile()
 
 - Internal cache ensures the same project is not loaded repeatedly.
@@ -65,7 +65,7 @@ IMPLEMENTATION NOTES
 
 SECURITY
 
-Since `.nvim/init.lua` is executed as raw Lua code, it is strongly
+Since `.nvim/workspace.lua` is executed as raw Lua code, it is strongly
 recommended to only use this in trusted projects.
 
 ==============================================================================

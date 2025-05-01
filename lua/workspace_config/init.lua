@@ -18,7 +18,7 @@ function M.load()
     return -- 同じプロジェクトなら再読み込みしない
   end
 
-  local config_path = root .. "/.nvim/init.lua"
+  local config_path = root .. "/.nvim/workspace.lua"
   if vim.fn.filereadable(config_path) == 1 then
     local ok, _ = pcall(dofile, config_path)
     if ok then
